@@ -21,7 +21,7 @@ createSqlFile('./test.xlsx', {
   Sobrenome: "varchar(255) NOT NULL",
   idade: "int DEFAULT NULL",
   id: "int PRIMARY KEY",
-  'Último nome': "varchar(255) NOT NULL"
+  ÚltimoNome: "varchar(255) NOT NULL"
  }
 );
 
