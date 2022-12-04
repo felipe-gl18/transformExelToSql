@@ -14,28 +14,23 @@ function createSqlFile(path, fieldsType){
         })
     }
 
-    const column = data.shift();
-    const columnWithTheSqlType = Object.assign({}, column);
-
-    for(let key of Object.keys(columnWithTheSqlType)){
-        columnWithTheSqlType[key] = `${columnWithTheSqlType[key]}`.replace(' ','_') + ' ' + fieldsType[columnWithTheSqlType[key]]
-    }
+    const column = Object.keys(fieldsType);
+    const columnwithOptions = Object.values(fieldsType)
 
     var fs = require('fs');
+    
     fs.writeFile(`${file.Props.SheetNames}.sql`,`
     DROP TABLE IF EXISTS \`${file.Props.SheetNames}\`;
     CREATE TABLE IF NOT EXISTS \`${file.Props.SheetNames}\` (
         ${
-            Object.values(columnWithTheSqlType).map((data) => {
-                return `${data}`
-            })
+            column.map((data, index) => { return data + ' ' + columnwithOptions[index] })
         }
     ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
     ${       
         data.map((data) => {
             return `
-                INSERT INTO \`${file.Props.SheetNames}\` (${Object.values(column).map((data)=>{return '`' + `${data}`.replace(' ','_') + '`'})}) VALUES
+                INSERT INTO \`${file.Props.SheetNames}\` (${column.map((data)=>{return '`' + `${data}`.replace(' ','_') + '`'})}) VALUES
                 (${Object.values(data).map((data)=>{ return typeof data === 'string' ? (`'` + data + `'`) : (data)})});
                 COMMIT;
                 `
@@ -48,4 +43,15 @@ function createSqlFile(path, fieldsType){
     })
 }
 
+createSqlFile('./sample1.xlsx', {
+    Postcode: "int DEFAULT NULL",
+    Sales_Rep_ID: "int DEFAULT NULL",
+    Sales_Rep_Name: "varchar(255) NOT NULL",
+    Year: "int PRIMARY KEY",
+    Value: "varchar(255) NOT NULL"
+    }
+);
+
 module.exports = createSqlFile;
+
+
