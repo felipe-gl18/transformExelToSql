@@ -16,11 +16,10 @@ segundo parâmetro, passe os valores exatos das colunas de sua planilha, juntame
 const createSqlFile = require('transformexeltosql');
 
 createSqlFile('./test.xlsx', {
-    Nome: "varchar(255) NOT NULL",
-    Sobrenome: "varchar(255) NOT NULL",
-    idade: "int DEFAULT NULL",
-    id: "int PRIMARY KEY",
-    'Último nome': "varchar(255) NOT NULL"
-    }
+  Nome: "varchar(255) NOT NULL",
+  Sobrenome: "varchar(255) NOT NULL",
+  idade: "int DEFAULT NULL",
+  id: "int PRIMARY KEY",
+  'Último nome': "varchar(255) NOT NULL"
+ }
 );
-
