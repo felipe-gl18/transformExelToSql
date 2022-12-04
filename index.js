@@ -18,7 +18,7 @@ function createSqlFile(path, fieldsType){
     const columnwithOptions = Object.values(fieldsType)
 
     var fs = require('fs');
-    
+
     fs.writeFile(`${file.Props.SheetNames}.sql`,`
     DROP TABLE IF EXISTS \`${file.Props.SheetNames}\`;
     CREATE TABLE IF NOT EXISTS \`${file.Props.SheetNames}\` (
@@ -42,15 +42,6 @@ function createSqlFile(path, fieldsType){
         console.log('File is created successfully');
     })
 }
-
-createSqlFile('./sample1.xlsx', {
-    Postcode: "int DEFAULT NULL",
-    Sales_Rep_ID: "int DEFAULT NULL",
-    Sales_Rep_Name: "varchar(255) NOT NULL",
-    Year: "int PRIMARY KEY",
-    Value: "varchar(255) NOT NULL"
-    }
-);
 
 module.exports = createSqlFile;
 
