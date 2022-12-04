@@ -13,6 +13,7 @@ XLSX Package (npm install xlsx)
 Primeiro importe o package, e chame a função createSqlFile, que recebe o caminho da sua planilha como primeiro parâmetro, e como
 segundo parâmetro, passe os valores exatos das colunas de sua planilha, juntamente com as propriedades que elas devem ter.
 
+```
 const createSqlFile = require('transformexeltosql');
 
 createSqlFile('./test.xlsx', {
@@ -23,3 +24,5 @@ createSqlFile('./test.xlsx', {
   'Último nome': "varchar(255) NOT NULL"
  }
 );
+
+```
